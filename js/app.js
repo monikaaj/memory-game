@@ -12,7 +12,9 @@
  *   - add each card's HTML to the page
  */
 
-// Shuffle function from http://stackoverflow.com/a/2450976
+
+
+// Shuffle function from http://stackoverflow.com/a/2450976 - tasowanie
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
