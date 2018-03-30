@@ -12,6 +12,8 @@
  *   - add each card's HTML to the page
  */
 
+ shuffle(cardsList); //przetasowana tablica z kartami
+
 
 
 // Shuffle function from http://stackoverflow.com/a/2450976 - tasowanie
