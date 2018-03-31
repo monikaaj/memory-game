@@ -16,19 +16,13 @@
 
  cardsList.forEach(createHTML);
 
-/* function createHTML (cardName, index, cardsList) {
-    let newI = document.createElement('i');
-    newI.outerHTML = '<i class="'+cardName+'"></i>';
-    let parentLi = document.querySelector('#card_${(index+1)}');
-    parentLi.appendChild(newI);
-} */
-
 function createHTML (cardName, index, cardsList) {
     let cardElement = document.querySelector("#card_"+(index+1));
     cardElement.className = cardName;
+
 }
 
-console.log(cardsList);
+
 
 
 
