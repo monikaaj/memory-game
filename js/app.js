@@ -2,13 +2,21 @@
  * Create a list that holds all of your cards
  */
 
- let cardsList = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb"];
-
+let cardsList = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb"];
+let cardsCollection = $('.card');
  // Functions declarations
 
  function createHTML (cardName, index, cardsList) {
     let cardElement = $('#card_'+(index+1)+'> i');
     cardElement.addClass(cardName);
+}
+
+function openCard (card) {
+    card.classList.add('open');
+}
+
+function showCard (card) {
+    card.classList.add('show');
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976 - tasowanie
@@ -39,9 +47,12 @@ function shuffle(array) {
 
  cardsList.forEach(createHTML);
 
- $('.card').addEventListener('click', viewCard);
-
- Node.addEventListener('click', function() { /* handle click */ });
+ for(let i = 0; i < cardsCollection.length; i++) {
+    cardsCollection[i].addEventListener('click', function viewCard() {
+        openCard(cardsCollection[i]);
+        showCard(cardsCollection[i]);
+    });
+}
 
 /*
  * set up the event listener for a card. If a card is clicked:
