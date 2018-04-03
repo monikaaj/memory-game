@@ -4,6 +4,11 @@
 
  let cardsList = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb"];
 
+ // Functions declarations
+
+ function createHTML (cardName, index, cardsList) {
+    $('#card_'+(index+1)).addClass(cardName);
+}
 
 /*
  * Display the cards on the page
@@ -16,11 +21,7 @@
 
  cardsList.forEach(createHTML);
 
-function createHTML (cardName, index, cardsList) {
-    let cardElement = document.querySelector("#card_"+(index+1));
-    cardElement.className = cardName;
 
-}
 
 
 
