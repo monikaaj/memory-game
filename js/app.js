@@ -67,13 +67,6 @@ function shuffle(array) {
     }, true);
 }
 
-setTimeout(function(){
-    rightIdElementClass = rightIdElement.removeAttribute(rightIdElementClass);
-    rightIdElementClass = rightIdElement.setAttribute("class", "card open show");  
-    rightClass = rightClicked.removeAttribute(rightClass);
-    rightClass = rightClicked.setAttribute("class", "card open show");
-},1000);
-
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
