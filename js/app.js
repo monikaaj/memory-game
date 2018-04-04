@@ -19,6 +19,15 @@ function showCard (card) {
     card.classList.add('show');
 }
 
+function closeCard (card) {
+    card.classList.remove('open');
+}
+
+function hideCard (card) {
+    card.classList.remove('show');
+}
+
+
 // Shuffle function from http://stackoverflow.com/a/2450976 - tasowanie
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -51,8 +60,19 @@ function shuffle(array) {
     cardsCollection[i].addEventListener('click', function viewCard() {
         openCard(cardsCollection[i]);
         showCard(cardsCollection[i]);
-    });
+        setTimeout(function () { 
+            closeCard(cardsCollection[i]);
+            hideCard(cardsCollection[i]);
+        }, 750);
+    }, true);
 }
+
+setTimeout(function(){
+    rightIdElementClass = rightIdElement.removeAttribute(rightIdElementClass);
+    rightIdElementClass = rightIdElement.setAttribute("class", "card open show");  
+    rightClass = rightClicked.removeAttribute(rightClass);
+    rightClass = rightClicked.setAttribute("class", "card open show");
+},1000);
 
 /*
  * set up the event listener for a card. If a card is clicked:
