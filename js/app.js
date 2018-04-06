@@ -4,6 +4,7 @@
 
 let cardsList = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb"];
 let cardsCollection = $('.card');
+let openedCards = [];
  // Functions declarations
 
  function createHTML (cardName, index, cardsList) {
@@ -58,14 +59,32 @@ function shuffle(array) {
 
  for(let i = 0; i < cardsCollection.length; i++) {
     cardsCollection[i].addEventListener('click', function viewCard() {
-        openCard(cardsCollection[i]);
-        showCard(cardsCollection[i]);
-        setTimeout(function () { 
-            closeCard(cardsCollection[i]);
-            hideCard(cardsCollection[i]);
-        }, 750);
-    }, true);
-}
+        switch (openedCards.length) {
+            case 0:
+                openCard(cardsCollection[i]);
+                showCard(cardsCollection[i]);
+                
+                openedCards.push(this.outerHTML);
+                console.log(cardsCollection[i]);
+                console.log(openedCards);
+            break;
+            case 1:
+                openCard(cardsCollection[i]);
+                showCard(cardsCollection[i]);
+                openedCards.push(cardsCollection[i]);
+                setTimeout(function () { 
+                    closeCard(openedCards[0]);
+                    hideCard(openedCards[0]);
+                    closeCard(openedCards[1]);
+                    hideCard(openedCards[1]);
+                }, 750);
+                console.log(openedCards);
+                openedCards.splice(0);
+                console.log(openedCards);
+            break;
+        }
+    });
+ }
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -76,4 +95,4 @@ function shuffle(array) {
  *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
+*/
