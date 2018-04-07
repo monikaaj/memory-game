@@ -6,6 +6,8 @@ let cardsList = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-
 
 let cardsCollection = $('.card');   //a collection of all DOM elements with class .card in array
 let firstCardID = [];               //an array with first clicked card
+let moveCounter = 0;
+let movesElement = document.querySelector(".moves");
 
  // Functions declarations
 
@@ -48,6 +50,11 @@ function equalCards (card_1_ID, card_2_ID) {
     card_1[0].classList.add('match');
     card_2[0].classList.add('match');
     firstCardID.splice(0);
+}
+
+function displayMoves() {
+    moveCounter++;
+    movesElement.innerHTML = moveCounter;
 }
 
 
@@ -102,6 +109,7 @@ function shuffle(array) {
                     }, 750);
                 }
                 firstCardID.splice(0);
+                displayMoves();
             break;
         }
     });
