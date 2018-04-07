@@ -40,15 +40,6 @@ function doesCardsMatches (card_1_ID, card_2_ID) {
     console.log(card_1_class, card_2_class);
     if (card_1_class === card_2_class) return true
     else return false
-    /*{
-        setTimeout(function () { 
-            closeCard(card_1[0]);
-            hideCard(card_1[0]);
-            closeCard(card_2[0]);
-            hideCard(card_2[0]);
-        }, 750);
-        firstCardID.splice(0);
-    }*/
 }
 
 function equalCards (card_1_ID, card_2_ID) {
@@ -56,6 +47,7 @@ function equalCards (card_1_ID, card_2_ID) {
     const card_2 = $('#card_'+(card_2_ID));
     card_1[0].classList.add('match');
     card_2[0].classList.add('match');
+    firstCardID.splice(0);
 }
 
 
@@ -108,8 +100,8 @@ function shuffle(array) {
                         closeCard(cardsCollection[i]);
                         hideCard(cardsCollection[i]);
                     }, 750);
-                    firstCardID.splice(0);
                 }
+                firstCardID.splice(0);
             break;
         }
     });
