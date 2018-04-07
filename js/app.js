@@ -3,8 +3,10 @@
  */
 
 let cardsList = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb"];
-let cardsCollection = $('.card');
-let openedCards = [];
+
+let cardsCollection = $('.card');   //a collection of all DOM elements with class .card in array
+let firstCardID = [];               //an array with first clicked card
+
  // Functions declarations
 
  function createHTML (cardName, index, cardsList) {
@@ -59,28 +61,24 @@ function shuffle(array) {
 
  for(let i = 0; i < cardsCollection.length; i++) {
     cardsCollection[i].addEventListener('click', function viewCard() {
-        switch (openedCards.length) {
+        switch (firstCardID.length) {
             case 0:
                 openCard(cardsCollection[i]);
                 showCard(cardsCollection[i]);
-                
-                openedCards.push(this.outerHTML);
-                console.log(cardsCollection[i]);
-                console.log(openedCards);
+                firstCardID.push(i+1);
             break;
             case 1:
                 openCard(cardsCollection[i]);
                 showCard(cardsCollection[i]);
-                openedCards.push(cardsCollection[i]);
+                let IDnumber = firstCardID[0];
+                let firstCardElement = $('#card_'+IDnumber);
                 setTimeout(function () { 
-                    closeCard(openedCards[0]);
-                    hideCard(openedCards[0]);
-                    closeCard(openedCards[1]);
-                    hideCard(openedCards[1]);
+                    closeCard(firstCardElement[0]);
+                    hideCard(firstCardElement[0]);
+                    closeCard(cardsCollection[i]);
+                    hideCard(cardsCollection[i]);
                 }, 750);
-                console.log(openedCards);
-                openedCards.splice(0);
-                console.log(openedCards);
+                firstCardID.splice(0);
             break;
         }
     });
