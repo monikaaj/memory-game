@@ -30,6 +30,34 @@ function hideCard (card) {
     card.classList.remove('show');
 }
 
+function doesCardsMatches (card_1_ID, card_2_ID) {
+    const card_1 = $('#card_'+(card_1_ID));
+    const card_1_i = $('#card_'+(card_1_ID)+'> i');
+    const card_2 = $('#card_'+(card_2_ID));
+    const card_2_i = $('#card_'+(card_2_ID)+'> i');
+    const card_1_class = card_1_i[0].classList.item(1);
+    const card_2_class = card_2_i[0].classList.item(1);
+    console.log(card_1_class, card_2_class);
+    if (card_1_class === card_2_class) return true
+    else return false
+    /*{
+        setTimeout(function () { 
+            closeCard(card_1[0]);
+            hideCard(card_1[0]);
+            closeCard(card_2[0]);
+            hideCard(card_2[0]);
+        }, 750);
+        firstCardID.splice(0);
+    }*/
+}
+
+function equalCards (card_1_ID, card_2_ID) {
+    const card_1 = $('#card_'+(card_1_ID));
+    const card_2 = $('#card_'+(card_2_ID));
+    card_1[0].classList.add('match');
+    card_2[0].classList.add('match');
+}
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976 - tasowanie
 function shuffle(array) {
@@ -72,13 +100,16 @@ function shuffle(array) {
                 showCard(cardsCollection[i]);
                 let IDnumber = firstCardID[0];
                 let firstCardElement = $('#card_'+IDnumber);
-                setTimeout(function () { 
-                    closeCard(firstCardElement[0]);
-                    hideCard(firstCardElement[0]);
-                    closeCard(cardsCollection[i]);
-                    hideCard(cardsCollection[i]);
-                }, 750);
-                firstCardID.splice(0);
+                if (doesCardsMatches(IDnumber, i+1)) equalCards(IDnumber, i+1)
+                else {
+                    setTimeout(function () { 
+                        closeCard(firstCardElement[0]);
+                        hideCard(firstCardElement[0]);
+                        closeCard(cardsCollection[i]);
+                        hideCard(cardsCollection[i]);
+                    }, 750);
+                    firstCardID.splice(0);
+                }
             break;
         }
     });
