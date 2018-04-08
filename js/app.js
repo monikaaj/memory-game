@@ -54,7 +54,8 @@ function equalCards (card_1_ID, card_2_ID) {
 
 function displayMoves() {
     moveCounter++;
-    movesElement.innerHTML = moveCounter;
+    if (moveCounter===1) movesElement.innerHTML = moveCounter + ' Move';
+    else movesElement.innerHTML = moveCounter + ' Moves'; 
 }
 
 
