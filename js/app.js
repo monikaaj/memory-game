@@ -8,6 +8,8 @@ let cardsCollection = $('.card');   //a collection of all DOM elements with clas
 let firstCardID = [];               //an array with first clicked card
 let moveCounter = 0;
 let movesElement = document.querySelector(".moves");
+let time = 0;
+let elapsed = '0.0';
 
  // Functions declarations
 
@@ -57,6 +59,14 @@ function displayMoves() {
     if (moveCounter===1) movesElement.innerHTML = moveCounter + ' Move';
     else movesElement.innerHTML = moveCounter + ' Moves'; 
 }
+
+window.setInterval(function () {
+    let timerElement = document.querySelector(".timer");
+    time += 100;
+    elapsed = Math.floor(time / 100) / 10;
+    if(Math.round(elapsed) == elapsed) { elapsed += '.0'; }
+    timerElement.innerHTML = elapsed; 
+},100);
 
 
 // Shuffle function from http://stackoverflow.com/a/2450976 - tasowanie
