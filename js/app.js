@@ -10,6 +10,8 @@ let moveCounter = 0;
 let movesElement = document.querySelector(".moves");
 let time = 0;
 let elapsed = '0.0';
+let matchedCards =[];
+let previousCards = [];
 
  // Functions declarations
 
@@ -41,8 +43,10 @@ function doesCardsMatches (card_1_ID, card_2_ID) {
     const card_2_i = $('#card_'+(card_2_ID)+'> i');
     const card_1_class = card_1_i[0].classList.item(1);
     const card_2_class = card_2_i[0].classList.item(1);
-    console.log(card_1_class, card_2_class);
-    if (card_1_class === card_2_class) return true
+    if (card_1_class === card_2_class) {
+        matchedCards.push(card_1_class, card_2_class);
+        return true
+    }
     else return false
 }
 
@@ -58,6 +62,20 @@ function displayMoves() {
     moveCounter++;
     if (moveCounter===1) movesElement.innerHTML = moveCounter + ' Move';
     else movesElement.innerHTML = moveCounter + ' Moves'; 
+}
+
+function finishedGame() {
+    if (matchedCards.length == 16) {
+        const timerElement = document.querySelector(".timer");
+        const finishedTime = timerElement.textContent;
+        location.href="finishedGame.html";
+        const congratsElement =  document.querySelector(".congrats");
+        congratsElement.innerHTML = "Congratulations! You won the game with time " + finishedTime + "!";
+    }
+}
+
+function closePreviousCards (card_1_ID, card_2_ID) {
+
 }
 
 window.setInterval(function () {
@@ -86,13 +104,6 @@ function shuffle(array) {
 
 //main
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
  shuffle(cardsList); //przetasowana tablica z kartami
 
  cardsList.forEach(createHTML);
@@ -101,6 +112,7 @@ function shuffle(array) {
     cardsCollection[i].addEventListener('click', function viewCard() {
         switch (firstCardID.length) {
             case 0:
+                closePreviousCards()
                 openCard(cardsCollection[i]);
                 showCard(cardsCollection[i]);
                 firstCardID.push(i+1);
@@ -108,19 +120,21 @@ function shuffle(array) {
             case 1:
                 openCard(cardsCollection[i]);
                 showCard(cardsCollection[i]);
-                let IDnumber = firstCardID[0];
-                let firstCardElement = $('#card_'+IDnumber);
-                if (doesCardsMatches(IDnumber, i+1)) equalCards(IDnumber, i+1)
+                let firstCardElement = $('#card_'+firstCardID[0]);
+                previousCards.push(firstCardID[0]);
+                previousCards.push(i+1);
+                if (doesCardsMatches(firstCardID[0], i+1)) equalCards(firstCardID[0], i+1)
                 else {
                     setTimeout(function () { 
                         closeCard(firstCardElement[0]);
                         hideCard(firstCardElement[0]);
                         closeCard(cardsCollection[i]);
                         hideCard(cardsCollection[i]);
-                    }, 750);
+                    }, 500);
                 }
                 firstCardID.splice(0);
                 displayMoves();
+                finishedGame();
             break;
         }
     });
