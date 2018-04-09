@@ -119,3 +119,7 @@ h1 {
 .score-panel .timer {
     padding-left: 10px;
 }
+
+.hide-card {
+    display: none;
+}

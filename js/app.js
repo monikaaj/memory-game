@@ -68,15 +68,23 @@ function finishedGame() {
     if (matchedCards.length == 16) {
         const timerElement = document.querySelector(".timer");
         const finishedTime = timerElement.textContent;
-        location.href="finishedGame.html";
-        const congratsElement =  document.querySelector(".congrats");
-        congratsElement.innerHTML = "Congratulations! You won the game with time " + finishedTime + "!";
+        timerElement.innerHTML = finishedTime;
+        console.log(finishedTime);
+        for (let i=1; i <= 16; i++) {
+            let card = document.querySelector('#card_'+i);
+            card.style.cssText = 'display: none;';
+        }
+        showCongrats(finishedTime);
     }
 }
 
-function closePreviousCards (card_1_ID, card_2_ID) {
-
+function showCongrats (finishedTime) {
+    const congrats = document.createElement('li');
+    congrats.textContent = "Congratulations! You won the game in " + finishedTime +" seconds time!";
+    const deck = document.querySelector('.deck');
+    deck.appendChild(congrats);
 }
+
 
 window.setInterval(function () {
     let timerElement = document.querySelector(".timer");
@@ -112,7 +120,6 @@ function shuffle(array) {
     cardsCollection[i].addEventListener('click', function viewCard() {
         switch (firstCardID.length) {
             case 0:
-                closePreviousCards()
                 openCard(cardsCollection[i]);
                 showCard(cardsCollection[i]);
                 firstCardID.push(i+1);
