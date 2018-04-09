@@ -69,12 +69,12 @@ function finishedGame() {
         const timerElement = document.querySelector(".timer");
         const finishedTime = timerElement.textContent;
         timerElement.innerHTML = finishedTime;
-        console.log(finishedTime);
         for (let i=1; i <= 16; i++) {
             let card = document.querySelector('#card_'+i);
             card.style.cssText = 'display: none;';
         }
         showCongrats(finishedTime);
+        stopTime();
     }
 }
 
@@ -83,10 +83,16 @@ function showCongrats (finishedTime) {
     congrats.textContent = "Congratulations! You won the game in " + finishedTime +" seconds time!";
     const deck = document.querySelector('.deck');
     deck.appendChild(congrats);
+    congrats.classList.add('congrats-message');
+    const timerElement = document.querySelector(".timer");
+}
+
+function stopTime() {
+    clearInterval(myTime);
 }
 
 
-window.setInterval(function () {
+const myTime = window.setInterval(function () {
     let timerElement = document.querySelector(".timer");
     time += 100;
     elapsed = Math.floor(time / 100) / 10;
