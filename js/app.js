@@ -202,6 +202,7 @@ function shuffle(array) {
     bringCardsBack();
     closeCongrats ();
     closeAllCards();
+    matchedCards = [];
  });
 
 
