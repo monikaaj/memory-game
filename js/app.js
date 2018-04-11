@@ -118,17 +118,6 @@ function stopTime() {
     clearInterval(myTime);
 }
 
-function startTime() {
-    const myTime = window.setInterval(function () {
-        let timerElement = document.querySelector(".timer");
-        time += 100;
-        elapsed = Math.floor(time / 100) / 10;
-        if(Math.round(elapsed) == elapsed) { elapsed += '.0'; }
-        timerElement.innerHTML = elapsed; 
-    },100);
-}
-
-
 const myTime = window.setInterval(function () {
     let timerElement = document.querySelector(".timer");
     time += 100;
@@ -197,7 +186,6 @@ function shuffle(array) {
     matchedCards = [];
     shuffle(cardsList);
     time = 0;
-    startTime();
     moveCounter = 0;
     movesElement.innerHTML = '0 Moves';
  });
