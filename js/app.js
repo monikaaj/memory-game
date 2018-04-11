@@ -101,6 +101,37 @@ function closeCongrats () {
     parent[0].removeChild(child[0]);
 }
 
+/*
+function unmatchCards () {
+    for (let i=1; i <= 16; i++) {
+        let card = $('#card_'+i);
+        card[0].classList.remove('match');
+    }
+}
+
+function hideCards () {
+    for (let i=1; i <= 16; i++) {
+        let card = $('#card_'+i);
+        card[0].classList.remove('show');
+    }
+}
+
+function closeCards () {
+    for (let i=1; i <= 16; i++) {
+        let card = $('#card_'+i);
+        card[0].classList.remove('open');
+    }
+} */
+
+function closeAllCards () {
+    for (let i=1; i <= 16; i++) {
+        let card = $('#card_'+i);
+        card[0].classList.remove('match');
+        card[0].classList.remove('show');
+        card[0].classList.remove('open');
+    }
+}
+
 function stopTime() {
     clearInterval(myTime);
 }
@@ -170,6 +201,7 @@ function shuffle(array) {
  restartElement.addEventListener('click', function restart() {
     bringCardsBack();
     closeCongrats ();
+    closeAllCards();
  });
 
 
