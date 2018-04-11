@@ -203,6 +203,7 @@ function shuffle(array) {
     closeCongrats ();
     closeAllCards();
     matchedCards = [];
+    shuffle(cardsList);
  });
 
 
