@@ -196,6 +196,8 @@ function shuffle(array) {
     shuffle(cardsList);
     time = 0;
     startTime();
+    moveCounter = 0;
+    movesElement.innerHTML = '0 Moves';
  });
 
 
