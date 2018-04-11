@@ -12,6 +12,7 @@ let time = 0;
 let elapsed = '0.0';
 let matchedCards =[];
 let previousCards = [];
+let restartElement = document.querySelector(".restart");
 
  // Functions declarations
 
@@ -78,6 +79,12 @@ function finishedGame() {
     }
 }
 
+function bringCardsBack () {
+    for (let i=1; i <= 16; i++) {
+        $('#card_'+i).removeAttr("style");
+    }
+}
+
 function showCongrats (finishedTime) {
     const congrats = document.createElement('li');
     congrats.textContent = "Congratulations! You won the game in " + finishedTime +" seconds time!";
@@ -85,6 +92,13 @@ function showCongrats (finishedTime) {
     deck.appendChild(congrats);
     congrats.classList.add('congrats-message');
     const timerElement = document.querySelector(".timer");
+}
+
+function closeCongrats () {
+    const parent = document.getElementsByClassName('deck');
+    const child = document.getElementsByClassName('congrats-message');
+    console.log(parent, child);
+    parent[0].removeChild(child[0]);
 }
 
 function stopTime() {
@@ -152,6 +166,13 @@ function shuffle(array) {
         }
     });
  }
+
+ restartElement.addEventListener('click', function restart() {
+    bringCardsBack();
+    closeCongrats ();
+ });
+
+
 
 /*
  * set up the event listener for a card. If a card is clicked:
