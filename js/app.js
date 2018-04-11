@@ -93,6 +93,7 @@ function showCongrats (finishedTime) {
     const deck = document.querySelector('.deck');
     deck.appendChild(congrats);
     congrats.classList.add('congrats-message');
+    congrats.classList.add('w3-animate-zoom');
     const timerElement = document.querySelector(".timer");
 }
 
@@ -117,6 +118,7 @@ function closeAllCards () {
 function stopTime() {
     clearInterval(myTime);
 }
+
 
 const myTime = window.setInterval(function () {
     let timerElement = document.querySelector(".timer");
