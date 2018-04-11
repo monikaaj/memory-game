@@ -44,7 +44,7 @@ function doesCardsMatches (card_1_ID, card_2_ID) {
     const card_2_i = $('#card_'+(card_2_ID)+'> i');
     const card_1_class = card_1_i[0].classList.item(1);
     const card_2_class = card_2_i[0].classList.item(1);
-    if (card_1_class === card_2_class) {
+    if (card_1_class === card_2_class && card_1_ID !== card_2_ID) {
         matchedCards.push(card_1_class, card_2_class);
         return true
     }
