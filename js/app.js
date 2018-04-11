@@ -56,6 +56,8 @@ function equalCards (card_1_ID, card_2_ID) {
     const card_2 = $('#card_'+(card_2_ID));
     card_1[0].classList.add('match');
     card_2[0].classList.add('match');
+    card_1[0].classList.add('card-shake');
+    card_2[0].classList.add('card-shake');
     firstCardID.splice(0);
 }
 
