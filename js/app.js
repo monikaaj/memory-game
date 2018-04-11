@@ -97,8 +97,10 @@ function showCongrats (finishedTime) {
 function closeCongrats () {
     const parent = document.getElementsByClassName('deck');
     const child = document.getElementsByClassName('congrats-message');
-    console.log(parent, child);
-    parent[0].removeChild(child[0]);
+    if (child.length !== 0) {
+        console.log(parent, child);
+        parent[0].removeChild(child[0]);
+    }
 }
 
 /*
@@ -134,6 +136,16 @@ function closeAllCards () {
 
 function stopTime() {
     clearInterval(myTime);
+}
+
+function startTime() {
+    const myTime = window.setInterval(function () {
+        let timerElement = document.querySelector(".timer");
+        time += 100;
+        elapsed = Math.floor(time / 100) / 10;
+        if(Math.round(elapsed) == elapsed) { elapsed += '.0'; }
+        timerElement.innerHTML = elapsed; 
+    },100);
 }
 
 
@@ -203,7 +215,10 @@ function shuffle(array) {
     closeCongrats ();
     closeAllCards();
     matchedCards = [];
+    console.log(cardsList);
     shuffle(cardsList);
+    console.log(cardsList);
+    startTime();
  });
 
 
