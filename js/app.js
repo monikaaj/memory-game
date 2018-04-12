@@ -8,6 +8,7 @@ let cardsCollection = $('.card');   //a collection of all DOM elements with clas
 let firstCardID = [];               //an array with first clicked card
 let moveCounter = 0;
 let movesElement = document.querySelector(".moves");
+let movesString = document.querySelector(".moves-string");
 let time = 0;
 let elapsed = '0.0';
 let matchedCards =[];
@@ -19,6 +20,23 @@ let restartElement = document.querySelector(".restart");
  function createHTML (cardName, index, cardsList) {
     let cardElement = $('#card_'+(index+1)+'> i');
     cardElement.addClass(cardName);
+}
+
+function displayStars () {
+    const timerElement = document.querySelector(".timer");
+    const finishedTime = timerElement.textContent;
+    const movesElement = document.querySelector(".moves");
+    const moves = movesElement.textContent;
+    let star_1 = document.querySelector('#star_1');
+    let star_3 = document.querySelector('#star_3');
+    if (finishedTime <= 18 && moves <= 20) {}
+    else if (finishedTime <= 24 && moves <= 27) {
+        star_1.style.cssText = 'display: none;';
+    }
+    else {
+        star_3.style.cssText = 'display: none;';
+    }
+
 }
 
 function openCard (card) {
@@ -63,8 +81,9 @@ function equalCards (card_1_ID, card_2_ID) {
 
 function displayMoves() {
     moveCounter++;
-    if (moveCounter===1) movesElement.innerHTML = moveCounter + ' Move';
-    else movesElement.innerHTML = moveCounter + ' Moves'; 
+    movesElement.innerHTML = moveCounter; 
+    if (moveCounter===1) movesString.innerHTML = ' Move';
+    else movesString.innerHTML = ' Moves'; 
 }
 
 function finishedGame() {
@@ -125,7 +144,8 @@ const myTime = window.setInterval(function () {
     time += 100;
     elapsed = Math.floor(time / 100) / 10;
     if(Math.round(elapsed) == elapsed) { elapsed += '.0'; }
-    timerElement.innerHTML = elapsed; 
+    timerElement.innerHTML = elapsed;
+    displayStars ()
 },100);
 
 
@@ -175,6 +195,7 @@ function shuffle(array) {
                 }
                 firstCardID.splice(0);
                 displayMoves();
+                displayStars();
                 finishedGame();
             break;
         }
