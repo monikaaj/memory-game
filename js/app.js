@@ -96,7 +96,7 @@ function finishedGame() {
             card.style.cssText = 'display: none;';
         }
         showCongrats(finishedTime);
-        stopTime();
+        hideTimer();
     }
 }
 
@@ -107,6 +107,7 @@ function bringCardsBack () {
 }
 
 function showCongrats (finishedTime) {
+    
     const congrats = document.createElement('li');
     congrats.textContent = "Congratulations! You won the game in " + finishedTime +" seconds time!";
     const deck = document.querySelector('.deck');
@@ -120,7 +121,6 @@ function closeCongrats () {
     const parent = document.getElementsByClassName('deck');
     const child = document.getElementsByClassName('congrats-message');
     if (child.length !== 0) {
-        console.log(parent, child);
         parent[0].removeChild(child[0]);
     }
 }
@@ -134,19 +134,34 @@ function closeAllCards () {
     }
 }
 
-function stopTime() {
-    clearInterval(myTime);
+
+function startTime() {
+    const myTime = window.setInterval(function () {
+        let timerElement = document.querySelector(".timer");
+        time += 100;
+        elapsed = Math.floor(time / 100) / 10;
+        if(Math.round(elapsed) == elapsed) { elapsed += '.0'; }
+        timerElement.innerHTML = elapsed; 
+    },100);
 }
 
 
-const myTime = window.setInterval(function () {
-    let timerElement = document.querySelector(".timer");
-    time += 100;
-    elapsed = Math.floor(time / 100) / 10;
-    if(Math.round(elapsed) == elapsed) { elapsed += '.0'; }
-    timerElement.innerHTML = elapsed;
-    displayStars ()
-},100);
+function showAllStars() {
+    $('#star_1').removeAttr("style");
+    $('#star_3').removeAttr("style");
+}
+
+function hideTimer() {
+    document.querySelector('.timer-text').style.cssText = 'display: none;';
+    document.querySelector('.timer').style.cssText = 'display: none;';
+    document.querySelector('.seconds').style.cssText = 'display: none;';
+}
+
+function showTimer() {
+    $('.timer-text').removeAttr("style");
+    $('.timer').removeAttr("style");
+    $('.seconds').removeAttr("style");
+}
 
 
 // Shuffle function from http://stackoverflow.com/a/2450976 - tasowanie
@@ -167,6 +182,7 @@ function shuffle(array) {
 //main
 
  shuffle(cardsList); //przetasowana tablica z kartami
+ startTime();
 
  cardsList.forEach(createHTML);
 
@@ -206,11 +222,14 @@ function shuffle(array) {
     bringCardsBack();
     closeCongrats ();
     closeAllCards();
+    showAllStars();
+    showTimer();
     matchedCards = [];
     shuffle(cardsList);
     time = 0;
     moveCounter = 0;
-    movesElement.innerHTML = '0 Moves';
+    movesElement.innerHTML = '0';
+
  });
 
 
