@@ -107,14 +107,20 @@ function bringCardsBack () {
 }
 
 function showCongrats (finishedTime) {
-    
     const congrats = document.createElement('li');
-    congrats.textContent = "Congratulations! You won the game in " + finishedTime +" seconds time!";
     const deck = document.querySelector('.deck');
+    if($('#star_1').css('display') == 'none' && $('#star_3').css('display') == 'none') {
+        congrats.innerHTML = "<p>Congratulations!</p><p>You won the game in " + finishedTime +" seconds time!</p><p>Your rating is <strong>\u2605</strong></p><p>Wish to play again? Click a refresh button above!</p>";
+    }
+    else if ($('#star_1').css('display') == 'none') {
+        congrats.innerHTML = "<p>Congratulations!</p><p>You won the game in " + finishedTime +" seconds time!</p><p>Your rating is <strong>\u2605 \u2605</strong></p><p> Wish to play again? Click a refresh button above!</p>";
+    }
+    else {
+        congrats.innerHTML = "<p>Congratulations!</p><p>You won the game in " + finishedTime +" seconds time!</p><p>Your rating is<strong> \u2605 \u2605 \u2605</strong></p><p>Wish to play again? Click a refresh button above!</p>";
+    }
     deck.appendChild(congrats);
     congrats.classList.add('congrats-message');
     congrats.classList.add('w3-animate-zoom');
-    const timerElement = document.querySelector(".timer");
 }
 
 function closeCongrats () {
@@ -124,6 +130,7 @@ function closeCongrats () {
         parent[0].removeChild(child[0]);
     }
 }
+
 
 function closeAllCards () {
     for (let i=1; i <= 16; i++) {
@@ -229,7 +236,6 @@ function shuffle(array) {
     time = 0;
     moveCounter = 0;
     movesElement.innerHTML = '0';
-
  });
 
 
