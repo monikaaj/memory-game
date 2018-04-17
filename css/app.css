@@ -18,7 +18,7 @@ body {
 
 body {
     background: #ffffff url('../img/aurora.jpg'); /* Background pattern from Subtle Patterns */
-    background-size: auto 150%;
+    /*background-size: auto 150%; */
     font-family: 'Coda', cursive;
 }
 
