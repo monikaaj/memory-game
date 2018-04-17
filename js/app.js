@@ -22,6 +22,16 @@ let restartElement = document.querySelector(".restart");
     cardElement.addClass(cardName);
 }
 
+function startTime() {
+    const myTime = window.setInterval(function () {
+        let timerElement = document.querySelector(".timer");
+        time += 100;
+        elapsed = Math.floor(time / 100) / 10;
+        if(Math.round(elapsed) == elapsed) { elapsed += '.0'; }
+        timerElement.innerHTML = elapsed; 
+    },100);
+}
+
 function displayStars () {
     const timerElement = document.querySelector(".timer");
     const finishedTime = timerElement.textContent;
@@ -36,7 +46,13 @@ function displayStars () {
     else {
         star_3.style.cssText = 'display: none;';
     }
+}
 
+function displayMoves() {
+    moveCounter++;
+    movesElement.innerHTML = moveCounter; 
+    if (moveCounter===1) movesString.innerHTML = ' Move';
+    else movesString.innerHTML = ' Moves'; 
 }
 
 function openCard (card) {
@@ -79,13 +95,6 @@ function equalCards (card_1_ID, card_2_ID) {
     firstCardID.splice(0);
 }
 
-function displayMoves() {
-    moveCounter++;
-    movesElement.innerHTML = moveCounter; 
-    if (moveCounter===1) movesString.innerHTML = ' Move';
-    else movesString.innerHTML = ' Moves'; 
-}
-
 function finishedGame() {
     if (matchedCards.length == 16) {
         const timerElement = document.querySelector(".timer");
@@ -100,10 +109,10 @@ function finishedGame() {
     }
 }
 
-function bringCardsBack () {
-    for (let i=1; i <= 16; i++) {
-        $('#card_'+i).removeAttr("style");
-    }
+function hideTimer() {
+    document.querySelector('.timer-text').style.cssText = 'display: none;';
+    document.querySelector('.timer').style.cssText = 'display: none;';
+    document.querySelector('.seconds').style.cssText = 'display: none;';
 }
 
 function showCongrats (finishedTime) {
@@ -131,7 +140,6 @@ function closeCongrats () {
     }
 }
 
-
 function closeAllCards () {
     for (let i=1; i <= 16; i++) {
         let card = $('#card_'+i);
@@ -141,28 +149,17 @@ function closeAllCards () {
     }
 }
 
-
-function startTime() {
-    const myTime = window.setInterval(function () {
-        let timerElement = document.querySelector(".timer");
-        time += 100;
-        elapsed = Math.floor(time / 100) / 10;
-        if(Math.round(elapsed) == elapsed) { elapsed += '.0'; }
-        timerElement.innerHTML = elapsed; 
-    },100);
+function bringCardsBack () {
+    for (let i=1; i <= 16; i++) {
+        $('#card_'+i).removeAttr("style");
+    }
 }
-
 
 function showAllStars() {
     $('#star_1').removeAttr("style");
     $('#star_3').removeAttr("style");
 }
 
-function hideTimer() {
-    document.querySelector('.timer-text').style.cssText = 'display: none;';
-    document.querySelector('.timer').style.cssText = 'display: none;';
-    document.querySelector('.seconds').style.cssText = 'display: none;';
-}
 
 function showTimer() {
     $('.timer-text').removeAttr("style");
@@ -170,8 +167,6 @@ function showTimer() {
     $('.seconds').removeAttr("style");
 }
 
-
-// Shuffle function from http://stackoverflow.com/a/2450976 - tasowanie
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -188,11 +183,11 @@ function shuffle(array) {
 
 //main
 
- shuffle(cardsList); //przetasowana tablica z kartami
+ shuffle(cardsList);
  startTime();
-
  cardsList.forEach(createHTML);
 
+//the Event Listener on all cards listetning to 'click' event, manage opening, matching, closing and finishing game
  for(let i = 0; i < cardsCollection.length; i++) {
     cardsCollection[i].addEventListener('click', function viewCard() {
         switch (firstCardID.length) {
@@ -225,6 +220,7 @@ function shuffle(array) {
     });
  }
 
+ //Event Listene on 'restart' icon, brings cards back, shuffle them, restart move counter and timer
  restartElement.addEventListener('click', function restart() {
     bringCardsBack();
     closeCongrats ();
