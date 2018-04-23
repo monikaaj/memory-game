@@ -272,6 +272,7 @@ for(let i = 0; i < cardsCollection.length; i++) {
  restartElement.addEventListener('click', function restart() {
     clickedCards = [];                  //clear array storing clicked element's ID
     firstCardID = [];                   //clear firs card's ID (from cards pair)
+    previousCards = [];
     time = 0;                           //reset timer
     moveCounter = 0;                    //reset moves counter
     movesElement.innerHTML = '0';       //set Moves to 0

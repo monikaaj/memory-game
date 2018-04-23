@@ -1,4 +1,4 @@
-@media screen and (min-width: 300px) and (max-width: 640px) {
+@media screen and (min-width: 300px) and (max-width: 520px) {
     .container {
         min-width: 100%;
         min-height: 100%;
@@ -24,7 +24,7 @@
 
     .deck .card {
         max-height: 10rem;
-        max-width: 10rem;
+        max-width: 6rem;
         margin: 5px;
         border-radius: 8px;
         cursor: pointer;
@@ -32,7 +32,17 @@
 
 }
 
-@media screen and (min-width: 641px) and (max-width: 760px) {
+@media screen and (min-width: 520px) and (max-width: 630px) {
+    .deck .card {
+        max-height: 10rem;
+        max-width: 8rem;
+        margin: 5px;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+}
+
+@media screen and (min-width: 631px) and (max-width: 760px) {
     .container {
         min-width: 100%;
         min-height: 100%;
